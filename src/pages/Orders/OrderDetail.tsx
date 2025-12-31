@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ShoppingCart, User, Calendar, DollarSign, Package } from 'lucide-react'
+import { ArrowLeft, ShoppingCart, User, Package } from 'lucide-react'
 import { type Order } from '../../data/mockData'
 import { ordersService } from '../../services/ordersService'
 import Loader from '../../components/Loader'

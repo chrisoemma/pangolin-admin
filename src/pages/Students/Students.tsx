@@ -6,12 +6,13 @@ import Loader from '../../components/Loader'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { fetchStudents } from '../../store/slices/studentsSlice'
 
-interface Student {
-  id: number
-  full_name: string
-  email: string
-  enrolledAt?: string
-}
+// interface Student {
+  
+//   id: number
+//   full_name: string
+//   email: string
+//   enrolledAt?: string
+// }
 
 const Students = () => {
   const navigate = useNavigate()

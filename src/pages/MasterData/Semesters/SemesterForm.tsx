@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { semestersService, type Semester } from '../../../services/semestersService'
+import { semestersService } from '../../../services/semestersService'
 import Loader from '../../../components/Loader'
 import { useToast } from '../../../contexts/ToastContext'
 

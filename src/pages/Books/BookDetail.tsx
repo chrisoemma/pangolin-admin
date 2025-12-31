@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { ArrowLeft, Edit, FileText, Users, BookOpen, Download, HardDrive, File } from 'lucide-react'
+import { ArrowLeft, Edit, FileText, Users, BookOpen, HardDrive, File } from 'lucide-react'
 import { type Book } from '../../data/mockData'
 import { booksService } from '../../services/booksService'
 import { ordersService } from '../../services/ordersService'
@@ -11,7 +11,7 @@ const BookDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [book, setBook] = useState<Book | null>(null)
-  const [bookOrders, setBookOrders] = useState<Order[]>([])
+  const [_bookOrders, setBookOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -61,10 +61,10 @@ const BookDetail = () => {
       </div>
     )
   }
-  const hardCopyOrders = bookOrders.filter(order => {
-    // In real app, order would have copyType field
-    return true // Placeholder
-  })
+  // const hardCopyOrders = bookOrders.filter(order => {
+  //   // In real app, order would have copyType field
+  //   return true // Placeholder
+  // })
 
   return (
     <div className="space-y-6">

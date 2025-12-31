@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { subjectsService, type Subject } from '../../../services/subjectsService'
+import { subjectsService} from '../../../services/subjectsService'
 import { departmentsService } from '../../../services/departmentsService'
 import { semestersService } from '../../../services/semestersService'
 import { yearOfStudyService } from '../../../services/yearOfStudyService'

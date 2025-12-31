@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Plus, Trash2 } from 'lucide-react'
-import { topicsService, type Topic } from '../../../services/topicsService'
+import { topicsService } from '../../../services/topicsService'
 import { subjectsService } from '../../../services/subjectsService'
 import Loader from '../../../components/Loader'
 import { useToast } from '../../../contexts/ToastContext'
@@ -12,6 +12,20 @@ interface SubtopicData {
   description?: string
   order?: number
   is_active?: boolean
+}
+
+interface TopicResponse {
+  id: number
+  name: string
+  subject_id: number
+  description?: string
+  subtopics?: Array<{
+    id: number
+    name: string
+    description?: string
+    order?: number
+    is_active?: boolean
+  }>
 }
 
 const TopicForm = () => {
@@ -43,14 +57,16 @@ const TopicForm = () => {
     })
   }, [])
 
-  // Fetch available subtopics when subject changes (for selecting existing subtopics from same subject)
+  // Fetch available subtopics when subject changes
   useEffect(() => {
     if (formData.subject_id) {
-      // Fetch all topics for this subject to get their subtopics
-      topicsService.getAll({ subject_id: formData.subject_id }).then(res => {
+      // Convert subject_id to number before passing to getAll
+      topicsService.getAll(Number(formData.subject_id)).then(res => {
         if (res.status && res.data) {
           const allSubtopics: Array<{ id: number; name: string; description?: string }> = []
-          res.data.forEach((topic: any) => {
+          const topics = res.data as any[]
+          
+          topics.forEach((topic: any) => {
             if (topic.subtopics && Array.isArray(topic.subtopics)) {
               topic.subtopics.forEach((st: any) => {
                 allSubtopics.push({
@@ -75,15 +91,18 @@ const TopicForm = () => {
       setFetching(true)
       topicsService.getById(id).then(res => {
         if (res.status && res.data) {
+          // Cast response to TopicResponse for type safety
+          const topicData = res.data as TopicResponse
+          
           setFormData({
-            name: res.data.name || '',
-            subject_id: String(res.data.subject_id),
-            description: res.data.description || '',
+            name: topicData.name || '',
+            subject_id: String(topicData.subject_id),
+            description: topicData.description || '',
           })
 
           // Set existing subtopics
-          if (res.data.subtopics && Array.isArray(res.data.subtopics)) {
-            setSubtopics(res.data.subtopics.map((st: any) => ({
+          if (topicData.subtopics && Array.isArray(topicData.subtopics)) {
+            setSubtopics(topicData.subtopics.map(st => ({
               id: st.id,
               name: st.name,
               description: st.description,
@@ -280,7 +299,7 @@ const TopicForm = () => {
             {subtopics.length === 0 ? (
               <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                 <p className="text-gray-600">No subtopics added yet</p>
-                <p className="text-sm text-gray-500 mt-1">Click "Add Subtopic" to get started</p>
+                <p className="text-sm text-gray-500 mt-1">Click &quot;Add Subtopic&quot; to get started</p>
               </div>
             ) : (
               <div className="space-y-4">

@@ -9,19 +9,28 @@ import EnrollStudentModal from '../../components/EnrollStudentModal'
 import Loader from '../../components/Loader'
 import { studentsService } from '../../services/studentsService'
 
-// Keep the old Student type structure for compatibility with mock data
-interface StudentWithMockData {
+// Student interface for our transformed data
+interface StudentData {
   id: string
   name: string
   email: string
   enrolledAt: string
-  [key: string]: any // Allow additional properties from API
+  [key: string]: any
+}
+
+// API response interface
+interface ApiStudentData {
+  id: number
+  full_name: string
+  email: string
+  created_at?: string
+  [key: string]: any
 }
 
 const StudentDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [student, setStudent] = useState<StudentWithMockData | null>(null)
+  const [student, setStudent] = useState<StudentData | null>(null)
   const [studentOrders, setStudentOrders] = useState<Order[]>([])
   const [studentPayments, setStudentPayments] = useState<Payment[]>([])
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false)
@@ -41,8 +50,12 @@ const StudentDetail = () => {
         ])
         
         if (studentResponse.status && studentResponse.data) {
-          const apiStudent = studentResponse.data.student || studentResponse.data
-          const transformedStudent: StudentWithMockData = {
+          // Handle the API response - it might be wrapped in a 'student' property or directly available
+          const responseData = studentResponse.data as any
+          const apiStudent: ApiStudentData = responseData.student || responseData
+          
+          // Transform the API student data to our internal format
+          const transformedStudent: StudentData = {
             ...apiStudent,
             id: apiStudent.id.toString(),
             name: apiStudent.full_name,
@@ -116,9 +129,9 @@ const StudentDetail = () => {
 
   const handleEnroll = (studentIds: string[]) => {
     // TODO: Replace with actual API call
-    if (selectedDiscussionId && studentIds.includes(student!.id)) {
+    if (selectedDiscussionId && student && studentIds.includes(student.id)) {
       // Enrollment successful
-      console.log(`Enrolled student ${student!.id} in discussion ${selectedDiscussionId}`)
+      console.log(`Enrolled student ${student.id} in discussion ${selectedDiscussionId}`)
     }
     setIsEnrollModalOpen(false)
     setSelectedDiscussionId(null)
@@ -151,7 +164,6 @@ const StudentDetail = () => {
                 </div>
                 <div className="flex-1">
                   <p className="text-lg font-semibold text-gray-900">{student.name}</p>
-                  
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -290,7 +302,7 @@ const StudentDetail = () => {
                       <p className="text-sm text-gray-500">{payment.paymentMethod} • {new Date(payment.paymentDate).toLocaleDateString()}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium text-gray-900">${payment.amount.toFixed(2)}</p>
+                      <p className="font-medium text-gray-900">Tsh {payment.amount.toFixed(2)}</p>
                       <span className={`text-xs px-2 py-1 rounded ${
                         payment.status === 'success' ? 'bg-green-100 text-green-800' :
                         payment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
@@ -374,4 +386,3 @@ const StudentDetail = () => {
 }
 
 export default StudentDetail
-

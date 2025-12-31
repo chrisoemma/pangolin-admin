@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { yearOfStudyService, type YearOfStudy } from '../../../services/yearOfStudyService'
+import { yearOfStudyService } from '../../../services/yearOfStudyService'
 import Loader from '../../../components/Loader'
 import { useToast } from '../../../contexts/ToastContext'
 

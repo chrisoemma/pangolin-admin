@@ -27,7 +27,7 @@ import DepartmentDetail from './pages/MasterData/Departments/DepartmentDetail'
 import Semesters from './pages/MasterData/Semesters/Semesters'
 import SemesterForm from './pages/MasterData/Semesters/SemesterForm'
 import SemesterDetail from './pages/MasterData/Semesters/SemesterDetail'
-import YearOfStudy from './pages/MasterData/YearOfStudy/YearOfStudy'
+import YearOfStudyList from './pages/MasterData/YearOfStudy/YearOfStudy'
 import YearOfStudyForm from './pages/MasterData/YearOfStudy/YearOfStudyForm'
 import YearOfStudyDetail from './pages/MasterData/YearOfStudy/YearOfStudyDetail'
 import Subjects from './pages/MasterData/Subjects/Subjects'
@@ -103,7 +103,7 @@ function App() {
           <Route path="master-data/semesters/new" element={<SemesterForm />} />
           <Route path="master-data/semesters/:id" element={<SemesterDetail />} />
           <Route path="master-data/semesters/:id/edit" element={<SemesterForm />} />
-          <Route path="master-data/year-of-study" element={<YearOfStudy />} />
+          <Route path="master-data/year-of-study" element={<YearOfStudyList />} />
           <Route path="master-data/year-of-study/new" element={<YearOfStudyForm />} />
           <Route path="master-data/year-of-study/:id" element={<YearOfStudyDetail />} />
           <Route path="master-data/year-of-study/:id/edit" element={<YearOfStudyForm />} />

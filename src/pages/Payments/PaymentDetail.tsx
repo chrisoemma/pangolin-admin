@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, CreditCard, User, Calendar, DollarSign, Package } from 'lucide-react'
+import { ArrowLeft, CreditCard, User, Package } from 'lucide-react'
 import { type Payment } from '../../data/mockData'
 import { paymentsService } from '../../services/paymentsService'
 import Loader from '../../components/Loader'

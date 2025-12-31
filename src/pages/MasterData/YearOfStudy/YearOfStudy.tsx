@@ -7,7 +7,7 @@ import Loader from '../../../components/Loader'
 import ConfirmationModal from '../../../components/ConfirmationModal'
 import { useToast } from '../../../contexts/ToastContext'
 
-const YearOfStudy = () => {
+const YearOfStudyList = () => {
   const navigate = useNavigate()
   const toast = useToast()
   const [searchTerm, setSearchTerm] = useState('')
@@ -221,5 +221,5 @@ const YearOfStudy = () => {
   )
 }
 
-export default YearOfStudy
+export default YearOfStudyList
 

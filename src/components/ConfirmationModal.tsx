@@ -1,4 +1,4 @@
-import { X, AlertTriangle, CheckCircle, Info, Trash2 } from 'lucide-react'
+import { AlertTriangle, CheckCircle, Info, Trash2 } from 'lucide-react'
 
 export type ConfirmationType = 'danger' | 'warning' | 'success' | 'info'
 

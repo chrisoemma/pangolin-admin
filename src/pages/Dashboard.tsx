@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BookOpen, Users, ShoppingCart, CreditCard, TrendingUp } from 'lucide-react'
+import { BookOpen, Users, ShoppingCart, CreditCard } from 'lucide-react'
 import { mockDiscussions } from '../data/mockData'
 import type { Book, Order, Payment } from '../data/mockData'
 import { booksService } from '../services/booksService'

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { mockProfessors, type Professor } from '../../../data/mockData'
+import { mockProfessors} from '../../../data/mockData'
 import Loader from '../../../components/Loader'
 
 const ProfessorForm = () => {
